@@ -13,8 +13,8 @@ def get_sentiment_dictionary(file_name):
 		sent_dict[entry[0]] = int(entry[1])
 	return sent_dict
 
-def to_lower_ascii(string):
-	return str.lower(unicodedata.normalize('NFKD', string).encode('ascii','ignore'))
+def to_ascii(string):
+	return unicodedata.normalize('NFKD', string).encode('ascii','ignore')
 
 def get_tweets(file_name):
 	tweet_file = open(file_name)
@@ -22,7 +22,7 @@ def get_tweets(file_name):
 	for tweet_string in tweet_file:
 		tweet = json.loads(tweet_string)
 		u_tweet_text = tweet[u'text'] if tweet.has_key(u'text') else u''
-		tweets.append(to_lower_ascii(u_tweet_text))
+		tweets.append(to_ascii(u_tweet_text))
 	return tweets
 
 def get_sentiment_score(term, sentiment_dictionary):
