@@ -1,0 +1,25 @@
+# 1
+For your selected competition, write a few sentences describing the competition problem as you interpreted it.  You want your writeup to be self-contained so your peer-reviewer does not need to go to Kaggle to study the competition description.  Clarity is more important than detail.  What's the overall goal?  What does the data look like?  How will the answers be evaluated?
+
+I have chosen to compete in the Amazon Employee Access Challenge. The challenge is about classifying whether an employee should be allowed to gain access priviliges to certain resources.
+The competition is a supervised learning problem where you have to predict given a new set of employee details (employee id, manager id, role information) and resource (resource id), should access priviliges be granted to the employee or not. The data consists of both the training and the test set. The solution needs to contain a boolean value, whether this tuple of information, should gain (value: 1) access to the resource or not (value: 0)!
+
+# 2
+Write a few sentences describing how you approached the problem.  What techniques did you use?
+
+First, to get comfortable with the data, I plotted the request/rejection-acceptance pattern for a few attributes. In my model, I have considered 5 attributes, which are RESOURCE, ROLE_DEPTNAME, ROLE_TITLE, ROLE_FAMILY, ROLE_CODE. Since the attributes are nominal and the value as such does not matter, I figured a decision tree would be best fit to the data.
+
+# 3
+Write a few sentences describing how you implemented your approach.  What languages and libraries did you use? What challenges did you run into?
+
+I loaded the data into postgres, to easily slice and dice the data to generate CSV files out of it. I fed these CSV files into R, and using the ggplot2 library was able to generate some interesting scatter plots out of it. I wrote a python script to generate a decision tree based on the training set, using the ID3 method.
+
+# 4
+Write a few sentences assessing your approach.  Did it work?  What do you think the problems were?
+
+The approach I used, did not really work very well, even though the score was around 0.78, I did not get a good standing. The MGR_ID field, could have played a role in it. Also, most of the solutions in the leaderboard seem to utilized Random Forests.
+
+# 5
+Write a few sentences describing how you improved on your solution, and whether or not it worked.
+
+My second try, included the MGR_ID and also I chose, instead of hand-rolling my own solution, to use the RandomForest implementation provided by scikit-learn library in python, to implement a version of Random Forest for this challenge. This did not really go as I had expected. There was a marginal improvement in my score, from 0.78 to 0.81.
